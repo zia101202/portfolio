@@ -1,0 +1,15 @@
+[
+    { "title": "CSS", "imageUrl": "/skills/css.png" },
+    { "title": "Figma", "imageUrl": "/skills/figma.png" },
+    { "title": "Firebase", "imageUrl": "/skills/firebase.png" },
+    { "title": "HTML", "imageUrl": "/skills/html.png" },
+    { "title": "JavaScript", "imageUrl": "/skills/js.png" },
+    { "title": "MongoDB", "imageUrl": "/skills/mongodb.png" },
+    { "title": "MySQL", "imageUrl": "/skills/mysql.png" },
+    { "title": "Next.js", "imageUrl": "/skills/next.png" },
+    { "title": "Node.js", "imageUrl": "/skills/nodejs.png" },
+    { "title": "Redux", "imageUrl": "/skills/redux.png" },
+    { "title": "Tailwind", "imageUrl": "/skills/tailwind.png" }
+    
+  ]
+  

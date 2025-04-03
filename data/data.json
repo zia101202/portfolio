@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "imageUrl": "/projects/1742899194801.jfif",
+    "title": "ii",
+    "description": "bb",
+    "gitHubLink": "bb"
+  },
+  {
+    "id": 2,
+    "imageUrl": "/projects/1743140171561.jpg",
+    "title": "WebPack",
+    "description": "background-image: linear-gradient(to right, #a855f7, #06b6d4);  Creates a gradient from purple-500 (#a855f7) to cyan-500 (#06b6d4).  -webkit-background-clip: text; & background-clip: text;  Makes sure the gradient applies only to the text",
+    "gitHubLink": "vvvvvvvvvvvvvvvvv"
+  }
+]
