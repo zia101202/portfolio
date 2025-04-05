@@ -1,12 +1,5 @@
 [
   {
-    "id": 1,
-    "imageUrl": "/projects/1742899194801.jfif",
-    "title": "ii",
-    "description": "bb",
-    "gitHubLink": "bb"
-  },
-  {
     "id": 2,
     "imageUrl": "/projects/1743140171561.jpg",
     "title": "WebPack",
