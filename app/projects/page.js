@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AnimatedTestimonials } from "@/lib/3d-card";
 import {NavbarDemo} from "@/components/ui/navbar";
 import { cn } from "@/lib/utils";
+import { SpotlightPreview } from "@/components/ui/spotlight";
 export default function page() {
   const [uploads, setUploads] = useState([]);
 
@@ -23,7 +24,7 @@ export default function page() {
 
    
 
-
+<SpotlightPreview/>
  <div className="relative flex min-h-screen w-full items-center justify-center bg-[#000319] dark:bg-black">
   {/* Grid Background - Moves Behind Everything */}
   <div

@@ -156,7 +156,7 @@ console.log(content);
     
     
 
-    <div className="bg-gray-900 fixed inset-0 my-[20px]  text-white p-5 rounded-xl border border-gray-600 shadow-lg max-w-3xl mx-auto">
+    <div className="bg-gray-900 fixed inset-0 sm:my-[20px] my-[10px]  text-white sm:p-5 p-[5px] rounded-xl border border-gray-600 shadow-lg max-w-3xl mx-auto">
           {/* Toolbar */}
           <div className="flex gap-2 p-3 bg-gray-800 rounded-lg mb-4">
             <select
@@ -252,7 +252,7 @@ console.log(content);
 
   
 
-  <form onSubmit={handleSubmit} className="space-y-4 min-w-full px-[40px]">
+  <form onSubmit={handleSubmit} className="space-y-4 min-w-full sm:px-[40px] px-[10px]">
   {message && <p className="text-center mb-4 text-sm font-medium text-gray-300">{message}</p>}
     <div>
       <label className="block text-sm font-medium text-gray-300">Start Date:</label>

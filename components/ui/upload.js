@@ -32,7 +32,7 @@ export default function Upload() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen  text-white">
+    <div className="flex justify-center items-center my-[30px] text-white">
       <div className="w-full max-w-md p-6 bg-[#1e1e1e] shadow-xl border border-gray-700 rounded-2xl">
         <h2 className="text-2xl font-semibold mb-4 text-center">Upload project</h2>
         <form onSubmit={handleUpload} className="space-y-4">

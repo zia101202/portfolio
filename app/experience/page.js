@@ -3,6 +3,7 @@ import React,{useEffect,useState} from "react";
 import { Timeline } from "@/lib/timeline";
 import {NavbarDemo} from "@/components/ui/navbar";
 import { cn } from "@/lib/utils";
+import { SpotlightPreview } from "@/components/ui/spotlight";
 export default function page() {
 
  const [dataFetch, setFetched] = useState([]);
@@ -63,7 +64,7 @@ JSX is stricter than HTML. You have to close tags like <br />. Your component al
   return (
     <>
 
-
+<SpotlightPreview/>
  <div className="relative flex min-h-screen w-full items-center justify-center bg-[#000319] dark:bg-black">
   {/* Grid Background - Moves Behind Everything */}
   <div

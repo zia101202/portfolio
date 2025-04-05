@@ -10,6 +10,7 @@ import GetAllSkills from "../../components/ui/getSkills";
 import Personal from "../../components/ui/personal";
 import Uploadpersonal from "../../components/ui/addPersonalData";
 import {NavbarDemo} from "@/components/ui/navbar";
+import { SpotlightPreview } from "@/components/ui/spotlight";
 import { cn } from "@/lib/utils";
 const components = [
   { name: "Upload Project", component: <Upload /> },
@@ -18,8 +19,8 @@ const components = [
   { name: "View Experience", component: <AllExperience /> },
   { name: "Upload Skills", component: <SkillUpload /> },
   { name: "View Skills", component: <GetAllSkills /> },
-  { name: "PersonalData", component: <Personal /> },
-  { name: "Uploadpersonal", component: <Uploadpersonal /> },
+  { name: "Personal Data", component: <Personal /> },
+  { name: "Upload personal", component: <Uploadpersonal /> },
 ];
 
 export default function Page() {
@@ -49,7 +50,7 @@ export default function Page() {
   return (
     <>
  
-
+<SpotlightPreview/>
  
             
                 <div

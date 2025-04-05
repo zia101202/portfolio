@@ -12,6 +12,7 @@ import { MdEmail } from "react-icons/md";
 import { FaYoutube } from "react-icons/fa";
 import {LinkPreviewDemo} from  '@/components/ui/link'
 import {NavbarDemo} from "@/components/ui/navbar";
+import { SpotlightPreview } from "@/components/ui/spotlight";
 const page = () => {
 
 
@@ -26,6 +27,8 @@ const page = () => {
       }, []);
   
   return (
+    <>
+    <SpotlightPreview />
   <div className="relative flex h-screen w-full items-center justify-center bg-[#000319] dark:bg-black">
   {/* Grid Background - Moves Behind Everything */}
   <div
@@ -92,7 +95,7 @@ const page = () => {
   </div>
 </div>
 
-
+</>
 
   )
 }

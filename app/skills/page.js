@@ -5,6 +5,7 @@ import  {ThreeDCardDemo} from "@/components/ui/card"
 import {NavbarDemo} from "@/components/ui/navbar";
 import { cn } from "@/lib/utils";
 import {LinkPreviewDemo} from  '@/components/ui/link'
+import { SpotlightPreview } from "@/components/ui/spotlight";
 const page = () => {
    const [uploads, setUploads] = useState([]);
     
@@ -20,7 +21,7 @@ const page = () => {
   <>
 
 
-
+<SpotlightPreview/>
  <div className="relative min-h-screen flex h-full min-w-screen items-center justify-center bg-[#000319] dark:bg-black">
   {/* Grid Background - Moves Behind Everything */}
   <div

@@ -30,19 +30,19 @@ const HeroContent = () => {
     <motion.div
       initial="hidden"
       animate="visible"
-      className="md:flex flex-row  px-20  w-full z-[20] my-[100px] space-y-[110px]"
+      className="md:flex flex-row  sm:px-20 px-5 w-full z-[20] my-[100px] space-y-[110px]"
     >
       <div className=" w-full flex justify-center items-center   ">
       
 <div className="flex justify-center items-center">
         <motion.div
           variants={slideInFromLeft(0.5)}
-          className="flex flex-col max-h-[40px] justify-center items-center w-full  text-[34px]  text-white max-w-[600px] "
+          className="flex flex-col max-h-[40px] justify-center items-center w-full  text-[34px]  text-white  "
         >
-      <p className="text-white md:text-[28px] text-[18px]">Full stack Mern Developer</p>
+      <p className="text-white md:text-[28px] text-[22px]">Full stack Mern Developer</p>
           
            
-            <span className="text-transparent md:text-[35px] text-[20px] font-medium mt-[40px] bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+            <span className="text-transparent md:text-[35px] text-[26px] font-medium mt-[40px] bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
         
               <span ref={typedElement} />
             </span>
@@ -60,6 +60,7 @@ const HeroContent = () => {
           alt="work icons"
           height={500}
           width={500}
+          className="min-w-[300px] min-h-[300px]"
         />
       </motion.div>
 

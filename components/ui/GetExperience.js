@@ -42,7 +42,7 @@ export default function AllExprience() {
   };
 console.log(uploads);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+    <div className=" my-[30px] flex items-center justify-center bg-gray-900 text-white">
       <div className="w-full max-w-2xl bg-gray-800 p-6 rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold text-center mb-4">Experience</h1>
         
