@@ -20,33 +20,11 @@ export default function page() {
 
   console.log(uploads);
   return (
-  <>
-
-   
-
-<SpotlightPreview/>
- <div className="relative flex min-h-screen w-full items-center justify-center bg-[#000319] dark:bg-black">
-  {/* Grid Background - Moves Behind Everything */}
-  <div
-    className={cn(
-      "absolute inset-0 z-10", // Push background behind
-      "[background-size:80px_80px]",
-      "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
-      "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
-    )}
-    style={{ opacity: 0.11 }} // Reduced opacity
-  />
-
- 
-  <div className="relative z-20">
-  <NavbarDemo/>
-         { uploads?.jsonData?.length>0 &&
-   <AnimatedTestimonials testimonials={uploads.jsonData} />
-          }
-  </div>
-</div>
-       
-  
-  </>
+    <div id="projects" className="w-full py-10 z-20">
+      <h2 className="text-3xl md:text-5xl font-bold text-center mb-10 text-white">Projects</h2>
+      {uploads?.jsonData?.length > 0 && (
+        <AnimatedTestimonials testimonials={uploads.jsonData} />
+      )}
+    </div>
   );
 }

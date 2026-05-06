@@ -18,6 +18,7 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import CodeBlock from "@tiptap/extension-code-block";
 import TextStyle from "@tiptap/extension-text-style";
+import Color from "@tiptap/extension-color";
 import FontSize from "@tiptap/extension-font-size";
 
 import {
@@ -32,13 +33,13 @@ import {
   TableCellsIcon,
   HashtagIcon,
 } from "@heroicons/react/24/outline";
-export default function ExperienceForm({setExperiences}) {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+export default function ExperienceForm({ setExperiences, editMode = false, experienceData = null, onSuccess, onCancel }) {
+  const [startDate, setStartDate] = useState(editMode && experienceData ? experienceData.startDate : "");
+  const [endDate, setEndDate] = useState(editMode && experienceData ? experienceData.endDate : "");
   const [experience, setExperience] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(editMode && experienceData ? experienceData.description : "");
 
   const quillRef = useRef(null); // Reference for Quill editor
 
@@ -62,20 +63,41 @@ export default function ExperienceForm({setExperiences}) {
     const newExperience = { startDate, endDate, description: content };
 
     try {
-      const response = await fetch("/api/experience", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newExperience),
-      });
+      let response;
+      
+      if (editMode && experienceData) {
+        // Update existing experience
+        response = await fetch("/api/updateExperience", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: experienceData.id, ...newExperience }),
+        });
+      } else {
+        // Add new experience
+        response = await fetch("/api/experience", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newExperience),
+        });
+      }
 
       if (response.ok) {
-        setMessage("✅ Experience added successfully!");
-        setStartDate("");
-        setEndDate("");
-        setExperience("");
-        setContent(""); // Reset Quill editor
+        setMessage(editMode ? "✅ Experience updated successfully!" : "✅ Experience added successfully!");
+        if (!editMode) {
+          setStartDate("");
+          setEndDate("");
+          setExperience("");
+          setContent(""); // Reset Quill editor
+        }
+        
+        // Call onSuccess if provided, otherwise use setExperiences
+        if (onSuccess) {
+          setTimeout(() => onSuccess(), 500);
+        } else if (setExperiences) {
+          setTimeout(() => setExperiences(false), 500);
+        }
       } else {
-        setMessage("❌ Failed to add experience.");
+        setMessage(editMode ? "❌ Failed to update experience." : "❌ Failed to add experience.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -101,6 +123,7 @@ export default function ExperienceForm({setExperiences}) {
        ListItem,
        Image,
        TextStyle,
+       Color.configure({ types: ["textStyle"] }),
        FontSize.configure({ types: ["textStyle"] }),
        Link.configure({ openOnClick: true }),
        Table.configure({ resizable: true }),
@@ -114,7 +137,7 @@ export default function ExperienceForm({setExperiences}) {
          class: "h-[300px] w-full overflow-auto focus:outline-none", // Set height here
        },
      },
-     content: "<p>Hello World!</p>",
+     content: editMode && experienceData ? experienceData.description : "<p>Hello World!</p>",
      onUpdate: ({ editor }) => {
        setContent(editor.getHTML());
      },
@@ -153,12 +176,157 @@ console.log(content);
 
   return (
     <>
+    {editMode ? (
+      // Edit mode - wrapped properly for modal
+      <div className="bg-gray-900 text-white p-6 rounded-xl border border-gray-600 shadow-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <h2 className="text-2xl font-bold mb-4">✏️ Edit Experience</h2>
+        {/* Toolbar */}
+        <div className="flex gap-2 p-3 bg-gray-800 rounded-lg mb-4 flex-wrap">
+          <select
+            onChange={(e) => setFontSize(e.target.value)}
+              className="p-2 mx-1 bg-gray-700 text-white rounded-lg"
+            >
+              {fontSizes.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={() => editor.chain().focus().toggleBold().run()}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <BoldIcon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().toggleItalic().run()}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <ItalicIcon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().toggleUnderline().run()}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <UnderlineIcon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().toggleBulletList().run()}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <ListBulletIcon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().toggleOrderedList().run()}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <Bars3Icon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() =>
+                editor.chain().focus().toggleHeading({ level: 1 }).run()
+              }
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <HashtagIcon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() =>
+                editor.chain().focus().insertTable({ rows: 3, cols: 3 }).run()
+              }
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <TableCellsIcon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <CodeBracketIcon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() => {
+                const url = prompt("Enter Image URL");
+                if (url) editor.chain().focus().setImage({ src: url }).run();
+              }}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <PhotoIcon className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={() => {
+                const url = prompt("Enter Link URL");
+                if (url) editor.chain().focus().setLink({ href: url }).run();
+              }}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+            >
+              <LinkIcon className="w-5 h-5 text-white" />
+            </button>
+            <input
+              type="color"
+              onChange={(e) => editor.chain().focus().setColor(e.target.value).run()}
+              className="w-10 h-10 p-1 rounded-lg border border-gray-600 bg-gray-900"
+              title="Text color"
+            />
+            <button
+              type="button"
+              onClick={() => editor.chain().focus().unsetColor().run()}
+              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
+              title="Clear text color"
+            >
+              <span className="w-5 h-5 text-white">A</span>
+            </button>
+          </div>
     
-    
+          {/* Editor */}
+          <div className="border border-gray-700 p-4 rounded-lg bg-gray-800">
+            <EditorContent editor={editor} />
+          </div>
 
-    <div className="bg-gray-900 fixed inset-0 sm:my-[20px] my-[10px]  text-white sm:p-5 p-[5px] rounded-xl border border-gray-600 shadow-lg max-w-3xl mx-auto">
+          
+    <div className=" flex  mt-[10px]  text-white ">
+  
+
+  
+
+  <form onSubmit={handleSubmit} className="space-y-4 min-w-full sm:px-[40px] px-[10px]">
+  {message && <p className="text-center mb-4 text-sm font-medium text-gray-300">{message}</p>}
+    <div>
+      <label className="block text-sm font-medium text-gray-300">Start Date:</label>
+      <input
+        type="date"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+        required
+        className="w-full p-3 bg-[#1e1e1e] border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 outline-none"
+      />
+    </div>
+
+            <div className="flex space-x-2.5">
+              <button
+                type="button"
+                onClick={onCancel}
+                className="w-full flex justify-center items-center bg-gray-600 hover:bg-gray-700 transition-all duration-200 text-white py-2.5 rounded-lg font-medium"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full flex justify-center items-center bg-blue-600 hover:bg-blue-700 transition-all duration-200 text-white py-2.5 rounded-lg font-medium disabled:opacity-50"
+              >
+                {loading ? "Updating..." : "Update Experience"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      ) : (
+        // Add mode - full screen
+        <div className="bg-gray-900 fixed inset-0 sm:my-[20px] my-[10px]  text-white sm:p-5 p-[5px] rounded-xl border border-gray-600 shadow-lg max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold mb-4">➕ Add Experience</h2>
           {/* Toolbar */}
-          <div className="flex gap-2 p-3 bg-gray-800 rounded-lg mb-4">
+          <div className="flex gap-2 p-3 bg-gray-800 rounded-lg mb-4 flex-wrap">
             <select
               onChange={(e) => setFontSize(e.target.value)}
               className="p-2 mx-1 bg-gray-700 text-white rounded-lg"
@@ -240,70 +408,63 @@ console.log(content);
               <LinkIcon className="w-5 h-5 text-white" />
             </button>
           </div>
-    
+
           {/* Editor */}
           <div className="border border-gray-700 p-4 rounded-lg bg-gray-800">
             <EditorContent editor={editor} />
           </div>
 
-          
-    <div className=" flex  mt-[10px]  text-white ">
-  
+          <div className=" flex  mt-[10px]  text-white ">
+            <form onSubmit={handleSubmit} className="space-y-4 min-w-full sm:px-[40px] px-[10px]">
+              {message && <p className="text-center mb-4 text-sm font-medium text-gray-300">{message}</p>}
+              <div>
+                <label className="block text-sm font-medium text-gray-300">Start Date:</label>
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  required
+                  className="w-full p-3 bg-[#1e1e1e] border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+              </div>
 
-  
+              <div>
+                <label className="block text-sm font-medium text-gray-300">End Date:</label>
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  required
+                  className="w-full p-3 bg-[#1e1e1e] border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+              </div>
 
-  <form onSubmit={handleSubmit} className="space-y-4 min-w-full sm:px-[40px] px-[10px]">
-  {message && <p className="text-center mb-4 text-sm font-medium text-gray-300">{message}</p>}
-    <div>
-      <label className="block text-sm font-medium text-gray-300">Start Date:</label>
-      <input
-        type="date"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-        required
-        className="w-full p-3 bg-[#1e1e1e] border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 outline-none"
-      />
-    </div>
+              <div className="flex space-x-2.5">
+                <button
+                  onClick={() => {
+                    if (onCancel) {
+                      onCancel();
+                    } else if (setExperiences) {
+                      setExperiences(false);
+                    }
+                  }}
+                  className="w-full flex justify-center items-center bg-gray-600 hover:bg-gray-700 transition-all duration-200 text-white py-2.5 rounded-lg font-medium"
+                >
+                  Cancel
+                </button>
 
-    <div>
-      <label className="block text-sm font-medium text-gray-300">End Date:</label>
-      <input
-        type="date"
-        value={endDate}
-        onChange={(e) => setEndDate(e.target.value)}
-        required
-        className="w-full p-3 bg-[#1e1e1e] border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 outline-none"
-      />
-    </div>
-   
-
-
-<div className="flex space-x-2.5">
-
-    <button
-    
-      onClick={()=> setExperiences(false)}
-      className="w-full flex justify-center items-center bg-blue-600 hover:bg-blue-700 transition-all duration-200 text-white py-2.5 rounded-lg font-medium"
-    >
-      cancel
-    </button>
-
-
-   
-
-
-    <button
-      type="submit"
-      disabled={loading}
-      className="w-full flex justify-center items-center bg-blue-600 hover:bg-blue-700 transition-all duration-200 text-white py-2.5 rounded-lg font-medium"
-    >
-      {loading ? "Submitting..." : "Submit Experience"}
-    </button>
-    </div>
-  </form>
-  
-</div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full flex justify-center items-center bg-blue-600 hover:bg-blue-700 transition-all duration-200 text-white py-2.5 rounded-lg font-medium"
+                >
+                  {loading ? "Submitting..." : "Submit Experience"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+      )}
         </>
   );
 }

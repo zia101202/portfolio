@@ -5,26 +5,46 @@ import { motion } from "framer-motion";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { slideInFromLeft, slideInFromRight, slideInFromTop } from "@/lib/motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Typed from "typed.js";
 const HeroContent = () => {
 
   const typedElement = useRef(null); // Reference to span element
   const typedInstance = useRef(null); // Store the instance
+  const [heroData, setHeroData] = useState({
+    title: "Full stack Mern Developer",
+    typedText: ["Hello, My Name IS Zia ur Rehman!", "I am Software Engineer"]
+  });
 
   useEffect(() => {
-    typedInstance.current = new Typed(typedElement.current, {
-      strings: ["Hello, My Name IS Zia ur Rehman!","I am Software Engineer"],
-      typeSpeed: 70,
-      backSpeed: 30,
-      
-    });
+    fetch("/api/hero")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.title) {
+          setHeroData(data);
+        }
+      })
+      .catch((err) => console.error("Error fetching hero data:", err));
+  }, []);
+
+  useEffect(() => {
+    if (typedElement.current && heroData.typedText.length > 0) {
+      if (typedInstance.current) {
+        typedInstance.current.destroy();
+      }
+      typedInstance.current = new Typed(typedElement.current, {
+        strings: heroData.typedText,
+        typeSpeed: 70,
+        backSpeed: 30,
+      });
+    }
 
     return () => {
-      // Destroy instance on component unmount
-      typedInstance.current.destroy();
+      if (typedInstance.current) {
+        typedInstance.current.destroy();
+      }
     };
-  }, []);
+  }, [heroData.typedText]);
   return (
     <>
     <motion.div
@@ -39,13 +59,19 @@ const HeroContent = () => {
           variants={slideInFromLeft(0.5)}
           className="flex flex-col max-h-[40px] justify-center items-center w-full  text-[34px]  text-white  "
         >
-      <p className="text-white md:text-[28px] text-[22px]">Full stack Mern Developer</p>
+      <p 
+        className="text-white font-semibold"
+        style={{ fontSize: heroData.titleSize ? `${heroData.titleSize}px` : "40px" }}
+      >
+        {heroData.title}
+      </p>
           
-           
-            <span className="text-transparent md:text-[35px] text-[26px] font-medium mt-[40px] bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-        
-              <span ref={typedElement} />
-            </span>
+      <span 
+        className="text-transparent font-bold mt-[40px] bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500"
+        style={{ fontSize: heroData.typedTextSize ? `${heroData.typedTextSize}px` : "50px", lineHeight: 1.2 }}
+      >
+        <span ref={typedElement} />
+      </span>
        
         </motion.div>
         </div>

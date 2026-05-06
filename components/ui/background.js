@@ -5,6 +5,11 @@ import { SpotlightPreview } from "./spotlight";
 import {NavbarDemo} from "./navbar";
 import HeroContent from "./HeroContent";
 
+import ExperienceSection from "@/app/experience/page";
+import ProjectsSection from "@/app/projects/page";
+import SkillsSection from "@/app/skills/page";
+import ContactSection from "@/app/contact/page";
+
 export function GridBackgroundDemo() {
   return (
     <>
@@ -25,9 +30,16 @@ export function GridBackgroundDemo() {
 
  
   <div className="relative z-20">
-    <NavbarDemo />
-    <HeroContent />
-  
+    <div className="sticky top-0 z-50">
+      <NavbarDemo />
+    </div>
+    <div id="home">
+      <HeroContent />
+    </div>
+    <ExperienceSection />
+    <ProjectsSection />
+    <SkillsSection />
+    <ContactSection />
   </div>
 </div>
 

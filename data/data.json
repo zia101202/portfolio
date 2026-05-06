@@ -5,5 +5,12 @@
     "title": "WebPack",
     "description": "background-image: linear-gradient(to right, #a855f7, #06b6d4);  Creates a gradient from purple-500 (#a855f7) to cyan-500 (#06b6d4).  -webkit-background-clip: text; & background-clip: text;  Makes sure the gradient applies only to the text",
     "gitHubLink": "vvvvvvvvvvvvvvvvv"
+  },
+  {
+    "id": 2,
+    "imageUrl": "/projects/1777989541290.jpg",
+    "title": "Finacial-Club",
+    "description": "Developed a full-stack event platform for event registration and ticket purchasing. Integrated secure payments via Checkout.com API. Built a credit-based networking system for attendee connections. Implemented Plus and Premier subscription plans with enhanced features. Enabled admin and user-hosted events with customizable ticket pricing. Added coupon and discount systems for promotions",
+    "gitHubLink": "https://github.com/usamasarwar1/financial-club"
   }
 ]
