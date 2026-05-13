@@ -6,7 +6,7 @@ import {NavbarDemo} from "@/components/ui/navbar";
 import { cn } from "@/lib/utils";
 import {LinkPreviewDemo} from  '@/components/ui/link'
 import { SpotlightPreview } from "@/components/ui/spotlight";
-const page = () => {
+const Page = () => {
    const [uploads, setUploads] = useState([]);
     
   
@@ -29,4 +29,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

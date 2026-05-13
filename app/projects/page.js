@@ -4,7 +4,7 @@ import { AnimatedTestimonials } from "@/lib/3d-card";
 import {NavbarDemo} from "@/components/ui/navbar";
 import { cn } from "@/lib/utils";
 import { SpotlightPreview } from "@/components/ui/spotlight";
-export default function page() {
+export default function Page() {
   const [uploads, setUploads] = useState([]);
 
   useEffect(() => {

@@ -13,7 +13,7 @@ import { FaYoutube } from "react-icons/fa";
 import {LinkPreviewDemo} from  '@/components/ui/link'
 import {NavbarDemo} from "@/components/ui/navbar";
 import { SpotlightPreview } from "@/components/ui/spotlight";
-const page = () => {
+const Page = () => {
 
 
     const [uploads, setUploads] = useState([]);
@@ -63,4 +63,4 @@ const page = () => {
   );
 }
 
-export default page
+export default Page

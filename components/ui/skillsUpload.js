@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { UploadCloud } from "lucide-react";
+import Image from "next/image";
 
 export default function SkillUpload() {
   const [file, setFile] = useState(null);
@@ -61,7 +62,7 @@ export default function SkillUpload() {
         </form>
         {imageUrl && (
           <div className="mt-4 text-center">
-            <img src={imageUrl} alt="Uploaded" className="w-32 h-32 mx-auto rounded-lg border border-gray-600" />
+            <Image src={imageUrl} alt="Uploaded" width={128} height={128} className="w-32 h-32 mx-auto rounded-lg border border-gray-600" unoptimized />
           </div>
         )}
       </div>
