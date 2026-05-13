@@ -134,7 +134,7 @@ export default function ExperienceForm({ setExperiences, editMode = false, exper
      ],
      editorProps: {
        attributes: {
-         class: "h-[300px] w-full overflow-auto focus:outline-none", // Set height here
+         class: "h-[300px] w-full overflow-auto focus:outline-none [&_ul]:list-disc [&_ul]:ml-5 [&_ol]:list-decimal [&_ol]:ml-5 [&_h1]:text-3xl [&_h1]:font-bold [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-xl [&_h3]:font-bold", // Set height and restore basic styles
        },
      },
      content: editMode && experienceData ? experienceData.description : "<p>Hello World!</p>",
@@ -193,36 +193,42 @@ console.log(content);
               ))}
             </select>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleBold().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <BoldIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleItalic().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <ItalicIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleUnderline().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <UnderlineIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleBulletList().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <ListBulletIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleOrderedList().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <Bars3Icon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() =>
                 editor.chain().focus().toggleHeading({ level: 1 }).run()
               }
@@ -231,6 +237,7 @@ console.log(content);
               <HashtagIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() =>
                 editor.chain().focus().insertTable({ rows: 3, cols: 3 }).run()
               }
@@ -239,12 +246,14 @@ console.log(content);
               <TableCellsIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleCodeBlock().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <CodeBracketIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => {
                 const url = prompt("Enter Image URL");
                 if (url) editor.chain().focus().setImage({ src: url }).run();
@@ -254,6 +263,7 @@ console.log(content);
               <PhotoIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => {
                 const url = prompt("Enter Link URL");
                 if (url) editor.chain().focus().setLink({ href: url }).run();
@@ -302,6 +312,17 @@ console.log(content);
       />
     </div>
 
+    <div>
+      <label className="block text-sm font-medium text-gray-300">End Date:</label>
+      <input
+        type="date"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+        required
+        className="w-full p-3 bg-[#1e1e1e] border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 outline-none"
+      />
+    </div>
+
             <div className="flex space-x-2.5">
               <button
                 type="button"
@@ -338,36 +359,42 @@ console.log(content);
               ))}
             </select>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleBold().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <BoldIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleItalic().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <ItalicIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleUnderline().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <UnderlineIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleBulletList().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <ListBulletIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleOrderedList().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <Bars3Icon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() =>
                 editor.chain().focus().toggleHeading({ level: 1 }).run()
               }
@@ -376,6 +403,7 @@ console.log(content);
               <HashtagIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() =>
                 editor.chain().focus().insertTable({ rows: 3, cols: 3 }).run()
               }
@@ -384,12 +412,14 @@ console.log(content);
               <TableCellsIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleCodeBlock().run()}
               className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600"
             >
               <CodeBracketIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => {
                 const url = prompt("Enter Image URL");
                 if (url) editor.chain().focus().setImage({ src: url }).run();
@@ -399,6 +429,7 @@ console.log(content);
               <PhotoIcon className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={() => {
                 const url = prompt("Enter Link URL");
                 if (url) editor.chain().focus().setLink({ href: url }).run();

@@ -21,12 +21,10 @@ export default function Page() {
   const timelineData = dataFetch?.map((item) => ({
     title: `${item?.startDate} - ${item?.endDate}`, // Correctly formats the date range in the title
     content: (
-      <div>
-        <p className="text-xs md:text-sm font-normal mb-8">
-          <div dangerouslySetInnerHTML={{ __html: item.description }} />
-
-        </p>
-      </div>
+      <div 
+        className="text-xs md:text-sm font-normal mb-8 [&_ul]:list-disc [&_ul]:ml-5 [&_ol]:list-decimal [&_ol]:ml-5 [&_h1]:text-2xl [&_h1]:font-bold [&_h2]:text-xl [&_h2]:font-bold [&_h3]:text-lg [&_h3]:font-bold"
+        dangerouslySetInnerHTML={{ __html: item.description }} 
+      />
     ),
   }));
 

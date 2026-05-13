@@ -1,43 +1,21 @@
-import path from "path";
-import fs from "fs";
-
-const filePath = path.join(process.cwd(), "data", "personal.json");
+import { readData, writeData } from "@/lib/dataStore";
 
 export default function handler(req, res) {
-
-    console.log('hi');
   try {
-    if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, "[]", "utf-8"); 
-    }
-
-    let rawData = fs.readFileSync(filePath, "utf-8");
-    let jsonData;
-
-    try {
-      jsonData = rawData.trim() ? JSON.parse(rawData) : [];
-    } catch (error) {
-      jsonData = [];
-    }
+    const jsonData = readData("personal.json", []);
 
     if (req.method === "POST") {
-      const { github, whatsapp, email,linkedin } = req.body;
-
-     console.log(req.body);
-
-      const newUpload = {
-        id: jsonData.length + 1,
+      const { github, whatsapp, email, linkedin } = req.body;
+      const newEntry = {
+        id: jsonData.length > 0 ? Math.max(...jsonData.map((e) => e.id)) + 1 : 1,
         github,
-         whatsapp,
-          email,
-          linkedin
+        whatsapp,
+        email,
+        linkedin,
       };
-
-      jsonData.push(newUpload);
-
-      fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2), "utf-8");
-
-      return res.status(200).json({ message: "Experience added successfully", ...newUpload });
+      jsonData.push(newEntry);
+      writeData("personal.json", jsonData);
+      return res.status(200).json({ message: "Personal data added successfully", ...newEntry });
     }
 
     if (req.method === "GET") {

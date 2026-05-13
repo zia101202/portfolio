@@ -1,42 +1,23 @@
-import fs from "fs";
-import path from "path";
-
-const dataPath = path.join(process.cwd(), "data", "data.json");
+import { readData, writeData } from "@/lib/dataStore";
 
 export default function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
-
   try {
     const { id, title, description, gitHubLink } = req.body;
+    if (!id) return res.status(400).json({ message: "Project ID is required" });
 
-    if (!id) {
-      return res.status(400).json({ message: "Project ID is required" });
-    }
+    const data = readData("data.json", []);
+    const idx = data.findIndex((p) => p.id === parseInt(id));
+    if (idx === -1) return res.status(404).json({ message: "Project not found" });
 
-    let data = [];
-    if (fs.existsSync(dataPath)) {
-      const fileContent = fs.readFileSync(dataPath, "utf-8");
-      data = JSON.parse(fileContent);
-    }
+    if (title !== undefined) data[idx].title = title;
+    if (description !== undefined) data[idx].description = description;
+    if (gitHubLink !== undefined) data[idx].gitHubLink = gitHubLink;
 
-    const projectIndex = data.findIndex((p) => p.id === parseInt(id));
-    if (projectIndex === -1) {
-      return res.status(404).json({ message: "Project not found" });
-    }
-
-    // Update the project
-    if (title !== undefined) data[projectIndex].title = title;
-    if (description !== undefined) data[projectIndex].description = description;
-    if (gitHubLink !== undefined) data[projectIndex].gitHubLink = gitHubLink;
-
-    fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-
-    res.status(200).json({
-      message: "Project updated successfully",
-      data: data[projectIndex],
-    });
+    writeData("data.json", data);
+    res.status(200).json({ message: "Project updated successfully", data: data[idx] });
   } catch (error) {
     console.error("Error updating project:", error);
     res.status(500).json({ message: "Internal server error", error: error.message });

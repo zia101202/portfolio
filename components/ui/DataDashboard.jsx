@@ -563,7 +563,11 @@ export default function DataDashboard() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4"
-            onClick={() => setEditExperienceModal({ isOpen: false, item: null })}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setEditExperienceModal({ isOpen: false, item: null });
+              }
+            }}
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -593,7 +597,11 @@ export default function DataDashboard() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm p-4"
-            onClick={() => setShowUpload({ type: null, isOpen: false })}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowUpload({ type: null, isOpen: false });
+              }
+            }}
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
