@@ -8,12 +8,7 @@ export default function Page() {
   const [uploads, setUploads] = useState([]);
 
   useEffect(() => {
-    fetch("/api/upload",
-        {
-            method: "GET",
-            
-          }
-    ) // Fetch uploaded files
+    fetch(`/api/upload?t=${new Date().getTime()}`, { method: "GET", cache: "no-store" }) // Fetch uploaded files
       .then((res) => res.json())
       .then((data) => setUploads(data));
   }, []);

@@ -20,10 +20,14 @@ const Page = () => {
 
     
       useEffect(() => {
-        fetch("/api/personal", { method: "GET", cache: "no-store" })
+        fetch(`/api/personal?t=${new Date().getTime()}`, { method: "GET", cache: "no-store" })
           .then((res) => res.json())
-          .then((data) => setUploads(data.experiences));
-         
+          .then((data) => {
+            if (data && data.experiences) {
+              setUploads(data.experiences);
+            }
+          })
+          .catch((err) => console.error("Error fetching personal data:", err));
       }, []);
   
   return (

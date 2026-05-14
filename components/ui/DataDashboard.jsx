@@ -32,12 +32,13 @@ export default function DataDashboard() {
   const fetchAllData = async () => {
     try {
       setLoading(true);
+      const timestamp = new Date().getTime();
       const [projectsRes, experienceRes, skillsRes, personalRes, heroRes] = await Promise.all([
-        fetch("/api/upload", { cache: "no-store" }),
-        fetch("/api/experience", { cache: "no-store" }),
-        fetch("/api/skills", { cache: "no-store" }),
-        fetch("/api/personal", { cache: "no-store" }),
-        fetch("/api/hero", { cache: "no-store" }),
+        fetch(`/api/upload?t=${timestamp}`, { cache: "no-store" }),
+        fetch(`/api/experience?t=${timestamp}`, { cache: "no-store" }),
+        fetch(`/api/skills?t=${timestamp}`, { cache: "no-store" }),
+        fetch(`/api/personal?t=${timestamp}`, { cache: "no-store" }),
+        fetch(`/api/hero?t=${timestamp}`, { cache: "no-store" }),
       ]);
 
       if (projectsRes.ok) {
@@ -127,6 +128,7 @@ export default function DataDashboard() {
       });
 
       if (response.ok) {
+        alert("✅ Changes saved successfully!");
         await fetchAllData();
         setEditModal({ isOpen: false, item: null, type: null });
       } else {
@@ -174,9 +176,19 @@ export default function DataDashboard() {
                     href={project.gitHubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 text-sm mb-3 block"
+                    className="text-blue-400 hover:text-blue-300 text-sm mb-1 block"
                   >
                     🔗 GitHub Link
+                  </a>
+                )}
+                {project.websiteUrl && (
+                  <a
+                    href={project.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-400 hover:text-blue-300 text-sm mb-3 block"
+                  >
+                    🌐 Live Website
                   </a>
                 )}
                 <div className="flex gap-2">

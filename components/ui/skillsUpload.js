@@ -4,7 +4,7 @@ import { useState } from "react";
 import { UploadCloud } from "lucide-react";
 import Image from "next/image";
 
-export default function SkillUpload() {
+export default function SkillUpload({ onSuccess }) {
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const [formData, setFormData] = useState({ title: "" });
@@ -25,7 +25,9 @@ export default function SkillUpload() {
 
     const result = await response.json();
     if (response.ok) {
+      alert("✅ Upload successful!");
       setImageUrl(result.url);
+      if (onSuccess) onSuccess();
     } else {
       alert("❌ Upload failed: " + result.error);
     }

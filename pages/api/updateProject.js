@@ -5,7 +5,7 @@ export default function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
   try {
-    const { id, title, description, gitHubLink } = req.body;
+    const { id, title, description, gitHubLink, websiteUrl } = req.body;
     if (!id) return res.status(400).json({ message: "Project ID is required" });
 
     const data = readData("data.json", []);
@@ -15,6 +15,7 @@ export default function handler(req, res) {
     if (title !== undefined) data[idx].title = title;
     if (description !== undefined) data[idx].description = description;
     if (gitHubLink !== undefined) data[idx].gitHubLink = gitHubLink;
+    if (websiteUrl !== undefined) data[idx].websiteUrl = websiteUrl;
 
     writeData("data.json", data);
     res.status(200).json({ message: "Project updated successfully", data: data[idx] });

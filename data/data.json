@@ -1,16 +1,34 @@
 [
   {
-    "id": 2,
-    "imageUrl": "/projects/1743140171561.jpg",
-    "title": "WebPack",
-    "description": "background-image: linear-gradient(to right, #a855f7, #06b6d4);  Creates a gradient from purple-500 (#a855f7) to cyan-500 (#06b6d4).  -webkit-background-clip: text; & background-clip: text;  Makes sure the gradient applies only to the text",
-    "gitHubLink": "vvvvvvvvvvvvvvvvv"
+    "id": 1,
+    "imageUrl": "/projects/1778746848551.jpg",
+    "title": "Event Management Platform",
+    "description": "Developed a full-stack event platform for event registration and ticket purchasing. Integrated secure payments via Checkout.com API. Built a credit-based networking system for attendee connections. Implemented Plus and Premier subscription plans with enhanced features. Enabled admin and user-hosted events with customizable ticket pricing. Added coupon and discount systems for promotions.",
+    "gitHubLink": "https://github.com/usamasarwar1/financial-club",
+    "websiteUrl": "https://financial-club-app.web.app/"
   },
   {
     "id": 2,
-    "imageUrl": "/projects/1777989541290.jpg",
-    "title": "Finacial-Club",
-    "description": "Developed a full-stack event platform for event registration and ticket purchasing. Integrated secure payments via Checkout.com API. Built a credit-based networking system for attendee connections. Implemented Plus and Premier subscription plans with enhanced features. Enabled admin and user-hosted events with customizable ticket pricing. Added coupon and discount systems for promotions",
-    "gitHubLink": "https://github.com/usamasarwar1/financial-club"
+    "imageUrl": "/projects/1778747085969.jpg",
+    "title": "Ai Stories",
+    "description": "Built an AI-driven system that converts user prompts into complete videos automatically. Used LLMs to generate structured story scripts from prompts. Generated voice narration and used Whisper for timestamp-based media synchronization. Created visuals using WAN 2.2 (video) and MiniMax, DeepInfra, Seedream, and Nano Banana . Implemented automated subtitles with animations and styling. Composed final videos by merging audio, visuals, and subtitles using FFmpeg on RunPod.",
+    "gitHubLink": "https://github.com/usamasarwar1/ai-story-frontend-v2",
+    "websiteUrl": "https://ai-story-frontend-v2.vercel.app/script"
+  },
+  {
+    "id": 3,
+    "imageUrl": "/projects/1778747633979.jpg",
+    "title": "Amfi",
+    "description": "AMFI AI  is a crypto coin and Web3 platform website. It promotes its own cryptocurrency token called AMFI (Automated Meta Finance). The project says it combines:  AI (Artificial Intelligence) for trading bots and market analysis DeFi (Decentralized Finance) for staking and crypto finance tools Metaverse/Web3 features like virtual services and digital assets",
+    "gitHubLink": "https://github.com/usamasarwar1/amfi-frontend",
+    "websiteUrl": "https://www.amfi.ai/"
+  },
+  {
+    "id": 4,
+    "imageUrl": "/projects/1778747877993.jpg",
+    "title": "Doctor Appointment",
+    "description": "Consultos Doctors Landing Page  is a modern healthcare and doctor consultation landing page website. It is designed for users to easily connect with doctors online and book medical consultations.  Main features shown on the website include:  Online doctor appointments Video and virtual consultations Search doctors by specialty Healthcare services information Doctor profiles and specialties Simple and user-friendly medical platform UI",
+    "gitHubLink": "https://github.com/usamasarwar1/consultos-doctors-landingpage",
+    "websiteUrl": "https://consultos-doctors-landingpage.netlify.app/"
   }
 ]

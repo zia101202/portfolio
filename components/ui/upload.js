@@ -4,10 +4,10 @@ import { useState } from "react";
 import { UploadCloud } from "lucide-react";
 import Image from "next/image";
 
-export default function Upload() {
+export default function Upload({ onSuccess }) {
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
-  const [formData, setFormData] = useState({ title: "", description: "", gitHubLink: "" });
+  const [formData, setFormData] = useState({ title: "", description: "", gitHubLink: "", websiteUrl: "" });
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ export default function Upload() {
     data.append("title", formData.title);
     data.append("description", formData.description);
     data.append("gitHubLink", formData.gitHubLink);
+    data.append("websiteUrl", formData.websiteUrl);
 
     const response = await fetch("/api/upload", {
       method: "POST",
@@ -26,7 +27,9 @@ export default function Upload() {
 
     const result = await response.json();
     if (response.ok) {
+      alert("✅ Upload successful!");
       setImageUrl(result.url);
+      if (onSuccess) onSuccess();
     } else {
       alert("❌ Upload failed: " + result.error);
     }
@@ -67,6 +70,14 @@ export default function Upload() {
               type="text"
               className="w-full p-2 bg-[#2a2a2a] border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setFormData({ ...formData, gitHubLink: e.target.value })}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm">Live Website URL:</label>
+            <input
+              type="text"
+              className="w-full p-2 bg-[#2a2a2a] border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
             />
           </div>
           <button

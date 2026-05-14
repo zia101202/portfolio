@@ -13,8 +13,14 @@
   },
   {
     "id": 3,
-    "startDate": "2024-03-18",
-    "endDate": "2025-03-11",
+    "startDate": "2023-04-18",
+    "endDate": "2023-06-20",
     "description": "<h3><span style=\"color: #f5f5f5; font-size: 28px\">DK Rucrement:</span><br></h3><ul><li><p><span style=\"font-size: 20px\">Worked on implementing lazy loading in React applications to improve initial page load performance and optimize component rendering.</span></p></li><li><p><span style=\"font-size: 20px\">Worked with Next.js features such as Server-Side Rendering (SSR) and Static Site Generation (SSG) to enhance application performance and SEO.</span></p></li><li><p><span style=\"font-size: 20px\">Implemented authentication and session management using JSON Web Tokens (JWT) and cookies for secure user access.</span></p></li><li><p><span style=\"font-size: 20px\">Developed and maintained custom routers and controllers for efficient request handling and better code organization.</span></p></li><li><p><span style=\"font-size: 20px\">Managed file upload functionality using Multer for efficient file processing and storage handling.</span></p></li></ul>"
+  },
+  {
+    "id": 4,
+    "startDate": "2025-03-12",
+    "endDate": "2026-05-20",
+    "description": "<p><span style=\"font-size: 28px\">MetaXols :</span></p><ul><li><p><span style=\"font-size: 18px\">At MetaXols, I worked on building scalable web applications and AI-based systems using technologies such as Google Cloud, Supabase, Edge Functions, and serverless architectures. I contributed to backend development, cloud integrations, authentication systems, automation workflows, and AI model deployment.</span></p></li><li><p><span style=\"font-size: 18px\">I developed and maintained serverless APIs using Supabase Edge Functions and cloud services to handle authentication, database operations, real-time updates, and secure user interactions. I worked with authentication flows, JWT-based authorization, database queries, and role-based access systems to ensure secure access control and efficient data management.</span></p></li><li><p><span style=\"font-size: 18px\">I also implemented real-time functionality using Supabase subscriptions and event-driven features, enabling live updates for user interactions, notifications, and application data synchronization.</span></p></li><li><p><span style=\"font-size: 18px\">In AI-related projects, I worked on deploying and integrating AI modules using Supabase and cloud infrastructure. I deployed the WAN 2.0 model from Hugging Face on RunPod for AI-powered media generation workflows. This included handling GPU environments, model execution pipelines, API integrations, and media processing workflows.</span></p></li><li><p><span style=\"font-size: 18px\">Additionally, I worked with n8n to automate workflows, third-party integrations, notifications, and backend processes, helping improve development efficiency and reduce manual operational tasks.</span></p></li><li><p><span style=\"font-size: 18px\">Through this experience, I gained strong exposure to cloud infrastructure, serverless backend development, AI deployment workflows, API integrations, automation systems, and scalable application architecture.</span></p></li></ul>"
   }
 ]

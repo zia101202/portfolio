@@ -26,7 +26,7 @@ export default function handler(req, res) {
       if (err) return res.status(500).json({ error: "File upload failed" });
       if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
-      const { title, description, gitHubLink } = req.body;
+      const { title, description, gitHubLink, websiteUrl } = req.body;
       const jsonData = readData("data.json", []);
 
       const newEntry = {
@@ -35,6 +35,7 @@ export default function handler(req, res) {
         title,
         description,
         gitHubLink,
+        websiteUrl,
       };
 
       jsonData.push(newEntry);

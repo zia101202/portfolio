@@ -19,35 +19,35 @@ export function NavbarDemo() {
       icon: (
         <IconHome className="h-full w-full text-white dark:text-neutral-300" />
       ),
-      href: "#home",
+      href: "/#home",
     },
     {
       title: "Experience",
       icon: (
         <IconDeviceLaptop className="h-full w-full text-white dark:text-neutral-300" />
       ),
-      href: "#experience",
+      href: "/#experience",
     },
     {
       title: "Projects",
       icon: (
         <IconUserCode className="h-full w-full text-white dark:text-neutral-300" />
       ),
-      href: "#projects",
+      href: "/#projects",
     },
     {
       title: "Skills",
       icon: (
         <IconTools className="h-full w-full text-white dark:text-neutral-300" />
       ),
-      href: "#skills",
+      href: "/#skills",
     },
     {
       title: "Contact",
       icon: (
         <IconPhone className="h-full w-full text-white dark:text-neutral-300" />
       ),
-      href: "#contact",
+      href: "/#contact",
     },
     {
       title: "Private",

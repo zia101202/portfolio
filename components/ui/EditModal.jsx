@@ -21,6 +21,7 @@ export default function EditModal({ isOpen, itemType, itemData, onSave, onCancel
           { name: "title", label: "Project Title", type: "text" },
           { name: "description", label: "Description", type: "textarea" },
           { name: "gitHubLink", label: "GitHub Link", type: "url" },
+          { name: "websiteUrl", label: "Live Website URL", type: "url" },
         ];
       case "experience":
         return [
