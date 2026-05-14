@@ -33,11 +33,11 @@ export default function DataDashboard() {
     try {
       setLoading(true);
       const [projectsRes, experienceRes, skillsRes, personalRes, heroRes] = await Promise.all([
-        fetch("/api/upload"),
-        fetch("/api/experience"),
-        fetch("/api/skills"),
-        fetch("/api/personal"),
-        fetch("/api/hero"),
+        fetch("/api/upload", { cache: "no-store" }),
+        fetch("/api/experience", { cache: "no-store" }),
+        fetch("/api/skills", { cache: "no-store" }),
+        fetch("/api/personal", { cache: "no-store" }),
+        fetch("/api/hero", { cache: "no-store" }),
       ]);
 
       if (projectsRes.ok) {
@@ -213,7 +213,7 @@ export default function DataDashboard() {
         <p className="text-gray-400 text-center py-8">No experience yet</p>
       ) : (
         <div className="space-y-3">
-          {experiences.map((exp, idx) => (
+          {[...experiences].sort((a, b) => new Date(b.startDate || 0) - new Date(a.startDate || 0)).map((exp, idx) => (
             <motion.div
               key={exp.id}
               initial={{ opacity: 0, x: -20 }}

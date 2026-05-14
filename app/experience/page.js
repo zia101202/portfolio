@@ -18,7 +18,13 @@ export default function Page() {
 
 
   console.log(dataFetch);
-  const timelineData = dataFetch?.map((item) => ({
+  const sortedData = [...(dataFetch || [])].sort((a, b) => {
+    const dateA = new Date(a.startDate || 0);
+    const dateB = new Date(b.startDate || 0);
+    return dateB - dateA;
+  });
+
+  const timelineData = sortedData.map((item) => ({
     title: `${item?.startDate} - ${item?.endDate}`, // Correctly formats the date range in the title
     content: (
       <div 

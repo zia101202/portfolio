@@ -20,7 +20,7 @@ const Page = () => {
 
     
       useEffect(() => {
-        fetch("/api/personal", { method: "GET" })
+        fetch("/api/personal", { method: "GET", cache: "no-store" })
           .then((res) => res.json())
           .then((data) => setUploads(data.experiences));
          

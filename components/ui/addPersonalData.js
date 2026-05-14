@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { UploadCloud } from "lucide-react";
 
-export default function UploadPersonal() {
+export default function UploadPersonal({ onSuccess }) {
   const [formData, setFormData] = useState({
     github: "",
     whatsapp: "",
@@ -31,6 +31,7 @@ export default function UploadPersonal() {
       }
 
       alert("✅ Upload successful!"); // ✅ Fix: User feedback
+      if (onSuccess) onSuccess();
     } catch (error) {
       alert(`❌ Upload failed: ${error.message}`);
     }
